@@ -1,10 +1,9 @@
 import random
 import math
 
-__mataclass__ = type #using modern classes
-
 
 # Этот класс является классом инкапсулированным модулем карты
+
 class map_2048():
 
     def reset(self):
