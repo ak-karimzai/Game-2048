@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-from main import map_2048
+from map_2048 import map_2048
 
 class test_map_2048(TestCase):
 
