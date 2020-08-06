@@ -65,7 +65,23 @@ class map_2048():
     
      # Определить, закончена ли игра
     def is_gameover(self):
-        pass
+        for r in self.data:
+            # Если в горизонтальном направлении 
+            # еще 0, игра не закончена 
+            if r.count(0):
+                return False
+
+            for i in range(self.col - 1):
+                if r[i] == r[i + 1]:
+                    return False
+        for c in range(self.col - 1):
+            # Если два смежных элемента одинаковы 
+            # в вертикальном направлении, игра не закончена
+            for r in range(self.row - 1):
+                if self.data[r][c] == self.data[r + 1][c]:
+                    return False
+        
+        return True
     
     def left(self):
         # moveflag Если цифровой флаг успешно перемещен, если он перемещен, он равен true, 
@@ -118,7 +134,40 @@ class map_2048():
     
     # Движет Игра вверх
     def up(self):
-        pass
+        # moveflag делает тоже самое как в left
+        moveflag = False
+        
+        # Переместить все числа вверх, чтобы заполнить пробелы выше
+        for times in range(self.row - 1):
+            for c in range(self.col):
+                for r in range(self.row - 1):
+                    if self.data[r][c] == 0:
+                        moveflag = True
+                        self.data[r][c] = self.data[r + 1][c]
+                        self.data[r + 1][c] = 0
+        
+        # Определить, есть ли столкновение, если есть столкновение, объединить,
+        #  результат объединения выше, и пространство ниже заполнено
+        for c in range(self.col):
+            for r in range(self.row - 1):
+                if self.data[r][c] == self.data[r + 1][c]:
+                    moveflag = True
+                    self.data[r][c] *= 2
+                    self.data[r + 1][c] = 0
+        
+        # Затем переместите все числа вверх,
+        #  чтобы заполнить пробелы выше
+        for times in range(self.row - 1):
+            for c in range(self.col):
+                for r in range(self.row - 1):
+                    if self.data[r][c] == 0:
+                        moveflag = True
+                        self.data[r][c] = self.data[r + 1][c]
+                        self.data[r + 1][c] = 0
+        return moveflag
 
     def down(self):
-        pass
+        self.data.reverse()
+        moveflag = self.up()
+        self.data.reverse()
+        return moveflag
