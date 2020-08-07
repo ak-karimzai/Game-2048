@@ -87,7 +87,64 @@ class test_map_2048(TestCase):
         board.data = start
         board.down()
 
-        self.assertEqual(end, board.data)        
+        self.assertEqual(end, board.data)
+
+    ##Движение не происходит
+    #left()
+    def test_no_move_left(self):
+        start = [
+            [2, 4, 0, 0],
+            [0, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.left())
+
+    #right()
+    def test_no_move_right(self):
+        start = [
+            [0, 4, 2, 4],
+            [0, 0, 0, 0],
+            [2, 8, 16, 8],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.right())
+
+    #up()
+    def test_no_move_up(self):
+        start = [
+            [2, 4, 0, 8],
+            [4, 2, 0, 0],
+            [0, 8, 0, 0],
+            [0, 4, 0, 0]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.up())
+
+    def test_no_move_down(self):
+        start = [
+            [0, 0, 0, 0],
+            [0, 0, 2, 0],
+            [4, 2, 4, 0],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.down())
+
 
     ###board utilities
     ##reset()
