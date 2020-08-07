@@ -86,13 +86,14 @@ class map_2048():
         # moveflag Если цифровой флаг успешно перемещен, если он перемещен, он равен true, 
         # а исходная карта не изменяется, он равен false.
         moveflag = False
+        # копия для сравнения того, произошёл ли ход
+        copy = [x[:] for x in self.data]
 
         # Переместить все числа влево, чтобы заполнить левое пространство
         for times in range(self.col - 1):
             for r in self.data:
                 for c in range(self.col - 1):
                     if r[c] == 0:
-                        moveflag = True
                         r[c] = r[c + 1]
                         r[c + 1] = 0
         
@@ -101,7 +102,6 @@ class map_2048():
         for r in self.data:
             for c in range(self.col - 1):
                 if r[c] == r[c + 1]:
-                    moveflag = True
                     r[c] *= 2
                     r[c + 1] = 0
         
@@ -111,9 +111,13 @@ class map_2048():
             for r in self.data:
                 for c in range(self.col - 1):
                     if r[c] == 0:
-                        moveflag = True
                         r[c] = r[c + 1]
                         r[c + 1] = 0
+
+        # Сравнение нынешней доски и копии до хода
+        current = set(map(tuple, self.data))
+        previous = set(map(tuple, copy))
+        moveflag = current.difference(previous)
         return moveflag
 
     # Игра с правым сдвигом
@@ -133,15 +137,15 @@ class map_2048():
     
     # Движет Игра вверх
     def up(self):
-        # moveflag делает тоже самое как в left
+        # moveflag и copy делает тоже самое как в left
         moveflag = False
-        
+        copy = [x[:] for x in self.data]
+
         # Переместить все числа вверх, чтобы заполнить пробелы выше
         for times in range(self.row - 1):
             for c in range(self.col):
                 for r in range(self.row - 1):
                     if self.data[r][c] == 0:
-                        moveflag = True
                         self.data[r][c] = self.data[r + 1][c]
                         self.data[r + 1][c] = 0
         
@@ -150,7 +154,6 @@ class map_2048():
         for c in range(self.col):
             for r in range(self.row - 1):
                 if self.data[r][c] == self.data[r + 1][c]:
-                    moveflag = True
                     self.data[r][c] *= 2
                     self.data[r + 1][c] = 0
         
@@ -160,9 +163,13 @@ class map_2048():
             for c in range(self.col):
                 for r in range(self.row - 1):
                     if self.data[r][c] == 0:
-                        moveflag = True
                         self.data[r][c] = self.data[r + 1][c]
                         self.data[r + 1][c] = 0
+
+        # Сравнение нынешней доски и копии до хода
+        current = set(map(tuple, self.data))
+        previous = set(map(tuple, copy))
+        moveflag = current.difference(previous)
         return moveflag
 
     def down(self):
