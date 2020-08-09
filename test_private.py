@@ -27,17 +27,17 @@ def main():
             break
 
         if c in ('a', 'A'):
-            game.left()
-            game.fill2()
+            if game.left():
+                game.fill2()
         elif c in ('d', 'D'):
-            game.right()
-            game.fill2()
+            if game.right():
+                game.fill2()
         elif c in ('w', 'W'):
-            game.up()
-            game.fill2()
+            if game.up():
+                game.fill2()
         elif c in ('s', 'S'):
-            game.down()
-            game.fill2()
+            if game.down():
+                game.fill2()
         elif c in ('q', 'Q'):
             break
 
