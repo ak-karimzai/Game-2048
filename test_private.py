@@ -11,17 +11,9 @@ def main():
     game.reset()
 
     while True:
-        map = game.data
-        cell_width = game.col
 
         print("Score: ", game.get_score())
-        print('\n'.join(
-            ' '.join(
-                str(c).rjust(cell_width)
-                for c in r
-            )
-            for r in map
-        ))
+        display_map(game)
 
         if not game.is_gameover:
             print("No available moves left, game over.")
