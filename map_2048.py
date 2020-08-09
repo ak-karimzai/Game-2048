@@ -58,7 +58,10 @@ class map_2048():
             for ci in range(self.col):
                 if r[ci] == 0:
                     if offset == pos:
-                        r[ci] = 2
+                        if random.randint(1, 10):
+                            r[ci] = 2
+                        else:
+                            r[ci] = 4
                         return True
                     offset += 1
     
