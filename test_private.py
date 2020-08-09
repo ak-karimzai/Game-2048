@@ -11,11 +11,10 @@ def main():
     game.reset()
 
     while True:
-
         print("Score: ", game.get_score())
         display_map(game)
 
-        if not game.is_gameover():
+        if game.is_gameover():
             print("No available moves left, game over.")
             break
 
