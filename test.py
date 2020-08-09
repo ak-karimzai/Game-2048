@@ -93,9 +93,9 @@ class test_map_2048(TestCase):
     #left()
     def test_no_move_left(self):
         start = [
-            [2, 4, 0, 0],
-            [0, 0, 0, 0],
-            [2, 0, 0, 0],
+            [8, 4, 2, 4],
+            [6, 4, 2, 8],
+            [2, 8, 16, 8],
             [2, 4, 8, 2]
         ]
 
@@ -107,8 +107,8 @@ class test_map_2048(TestCase):
     #right()
     def test_no_move_right(self):
         start = [
-            [0, 4, 2, 4],
-            [0, 0, 0, 0],
+            [8, 4, 2, 4],
+            [6, 4, 2, 8],
             [2, 8, 16, 8],
             [2, 4, 8, 2]
         ]
@@ -121,10 +121,10 @@ class test_map_2048(TestCase):
     #up()
     def test_no_move_up(self):
         start = [
-            [2, 4, 0, 8],
-            [4, 2, 0, 0],
-            [0, 8, 0, 0],
-            [0, 4, 0, 0]
+            [2, 4, 6, 8],
+            [4, 2, 8, 6],
+            [6, 8, 2, 4],
+            [2, 4, 4, 8]
         ]
 
         board = map_2048()
@@ -134,9 +134,9 @@ class test_map_2048(TestCase):
 
     def test_no_move_down(self):
         start = [
-            [0, 0, 0, 0],
-            [0, 0, 2, 0],
-            [4, 2, 4, 0],
+            [8, 4, 2, 4],
+            [6, 256, 32, 2],
+            [4, 8, 16, 8],
             [2, 4, 8, 2]
         ]
 
