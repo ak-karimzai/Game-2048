@@ -1,3 +1,5 @@
+#Основной код
+
 import random
 import math
 
