@@ -207,7 +207,7 @@ class test_map_2048(TestCase):
 
         self.assertEqual(board.get_space_count(), 16)
 
-    ##get_score()
+    '''##get_score()
     #только малозначные (т.е. return = 0)
     def test_get_score_small(self):
         start = [
@@ -249,7 +249,7 @@ class test_map_2048(TestCase):
         board.data = start
 
         self.assertEqual(board.get_score(), 9216) #1024*(10-1)
-
+    '''
     ##fill2()
     #заполненная доска
     def test_fill2_filled(self):
