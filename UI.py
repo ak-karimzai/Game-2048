@@ -77,7 +77,7 @@ score = 0
 while True: # the game loop runs while the game part is playing
     windowSurface.fill(BACKGROUNDCOLOR)
     rect_y = 100
-    score = game.get_score()
+    score = game.score
     if score > topScore:
         topScore = score
     drawText('Счет: %s' % (score), font, windowSurface, 15, 10, '')

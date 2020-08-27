@@ -15,6 +15,7 @@ class map_2048():
                     [0 for i in range(self.col)]
                          for j in range(self.row)
                     ]
+        self.score = 0
         # self.data = [[x + 4 * y for x in range(self.__col)]
         #              for y in range(self.__row)]
         # self.data = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
@@ -36,7 +37,7 @@ class map_2048():
        
         return count
 
-    # Получить счет игры.
+    # just for testing
     def get_score(self):
         s = 0
         for r in self.data:
@@ -109,6 +110,7 @@ class map_2048():
                     moveflag = True
                     r[c] *= 2
                     r[c + 1] = 0
+                    self.score += r[c]
         
         # Затем переместите все цифры влево,
         #  чтобы заполнить левое пространство
@@ -158,6 +160,7 @@ class map_2048():
                     moveflag = True
                     self.data[r][c] *= 2
                     self.data[r + 1][c] = 0
+                    self.score += self.data[r][c]
         
         # Затем переместите все числа вверх,
         #  чтобы заполнить пробелы выше
