@@ -2,14 +2,14 @@ import pygame, random, sys
 from pygame.locals import *
 from map_2048 import map_2048
 
-WINDOWHEIGHT = 360
+WINDOWHEIGHT = 380
 TEXTCOLOR = (0, 0, 0)
 BACKGROUNDCOLOR = (192, 192, 192)
 FPS = 40
 
 h = 10
 
-RECT_SIZE = (54, 54)
+RECT_SIZE = (60, 60)
 
 WINDOWWIDTH = int(5*h + 4*RECT_SIZE[0])
 
