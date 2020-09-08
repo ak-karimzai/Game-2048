@@ -2,20 +2,25 @@ import pygame, random, sys
 from pygame.locals import *
 from map_2048 import map_2048
 
-WINDOWHEIGHT = 360
+WINDOWHEIGHT = 500
 TEXTCOLOR = (0, 0, 0)
 BACKGROUNDCOLOR = (192, 192, 192)
 FPS = 40
 
 h = 10
 
-RECT_SIZE = (54, 54)
+RECT_SIZE = (80, 80)
 
 WINDOWWIDTH = int(5*h + 4*RECT_SIZE[0])
 
 # Матрица игрового поля
 game = map_2048()
-
+'''
+game.data = [[4, 8, 2, 2],
+            [8, 2, 32, 2 ],
+            [4, 64, 4, 64], 
+            [16, 128, 16, 4]]
+'''
 
 def matf(x):
     if x > 255:
@@ -37,7 +42,7 @@ def waitForPlayerToPressKey():
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
-                terminate    
+                terminate()    
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE: # Выход из программы
                     terminate()
@@ -67,6 +72,7 @@ windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 pygame.display.set_caption('2048')
 
 font = pygame.font.SysFont(None, 30)
+font2 = pygame.font.SysFont(None, 21)
 
 # Переменные, в которых хранятся счет и рекорд
 file = open("2048.txt", "r")
@@ -82,8 +88,6 @@ while True: # the game loop runs while the game part is playing
         topScore = score
     drawText('Счет: %s' % (score), font, windowSurface, 15, 10, '')
     drawText('Рекорд: %s' % (topScore), font, windowSurface, 15, 40, '')
-
-    pygame.draw.rect(windowSurface, (60, 60, 60), (int(h/2), int(rect_y - h/2), int(RECT_SIZE[0]*4 + h*4), int(RECT_SIZE[1]*4) + int(h*4)))
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -106,15 +110,24 @@ while True: # the game loop runs while the game part is playing
 
             if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 if game.down():
-                    game.fill2()        
+                    game.fill2()
+                    
+    if game.is_gameover():
+        drawText('ИГРА ОКОНЧЕНА', font, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 - 20, 'c')
+        drawText('Нажмите клавишу любую клавишу', font2, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 10, 'c')
+        drawText('чтобы начать заново.', font2, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 30, 'c')
+        pygame.display.update()
+        waitForPlayerToPressKey()
+        game.reset()
 
-            if game.is_gameover():
-                add_to_file(topScore)
-                game_over_text()
-                break
-            
-
+    pygame.draw.rect(windowSurface, (60, 60, 60), (int(h/2), int(rect_y - h/2), int(RECT_SIZE[0]*4 + h*4), int(RECT_SIZE[1]*4) + int(h*4)))
+        
     # Цикл, рисующий клетки игрового поля
+    '''for i in game.data:
+        for j in i:
+            print(j, end = " ")
+        print()'''
+    
     for i in range(4):
         rect_x = h
         for j in range(4):
@@ -140,10 +153,10 @@ while True: # the game loop runs while the game part is playing
 
     mainClock.tick(FPS)
 
+    
 '''
 drawText('ИГРА ОКОНЧЕНА', font, windowSurface, (WINDOWWIDTH / 3), (WINDOWHEIGHT / 3))
 drawText('Нажмите клавишу "a" чтобы начать заново.', font, windowSurface, (WINDOWWIDTH / 3 - 140), (WINDOWHEIGHT / 3) + 50)
 pygame.display.update()
 waitForPlayerToPressKey()
 '''
-

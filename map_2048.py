@@ -37,13 +37,14 @@ class map_2048():
        
         return count
 
-    # just for testing
+    '''# just for testing
     def get_score(self):
         s = 0
         for r in self.data:
             for c in r:
                 s += 0 if c < 4 else c * int((math.log(c, 2) - 1.0))
         return s
+        '''
 
     # Заполнит 2 до пустой позиции, если заполнение прошло успешно, 
     # верните True, если оно заполнено, верните False,
