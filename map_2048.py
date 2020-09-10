@@ -62,7 +62,7 @@ class map_2048():
             for ci in range(self.col):
                 if r[ci] == 0:
                     if offset == pos:
-                        if random.randint(1, 10):
+                        if random.randint(1, 10) <= 9:
                             r[ci] = 2
                         else:
                             r[ci] = 4
