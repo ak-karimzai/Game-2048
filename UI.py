@@ -2,31 +2,32 @@ import pygame, random, sys
 from pygame.locals import *
 from map_2048 import map_2048
 
-WINDOWHEIGHT = 372
 text_color = pygame.Color("#756c63")
 BACKGROUNDCOLOR = (251, 248, 239)
 FPS = 40
 
-h = 6
+h = 8
 
-RECT_SIZE = (60, 60)
 
+RECT_SIZE = (80, 80)
+
+WINDOWHEIGHT = int(6*h + 4*RECT_SIZE[0] + 100)
 WINDOWWIDTH = int(7*h + 4*RECT_SIZE[0])
 
 map_color = {
-    0: ("#cdc1b4", "#756c63", 45),
+    0: ("#cdc1b4", "#756c63", 50),
     2: ("#eee4da", "#756c63", 45),
     4: ("#ede0c8", "#756c63", 45),
     8: ("#f2b179", "#f9f6f2", 45),
     16: ("#f59563", "#f9f6f2", 40),
     32: ("#f67c5f", "#f9f6f2", 40),
     64: ("#f65e3b", "#f9f6f2", 40),
-    128: ("#edcf72", "#f9f6f2",35),
-    256: ("#edcc61", "#f9f6f2", 35),
-    512: ("#e4c02a", "#f9f6f2", 35),
-    1024: ("#e2ba13", "#f9f6f2", 30),
-    2048: ("#ecc400", "#f9f6f2", 30),
-    4096: ("#3d3a33", "#f9f6f2", 30),
+    128: ("#edcf72", "#f9f6f2",40),
+    256: ("#edcc61", "#f9f6f2", 40),
+    512: ("#e4c02a", "#f9f6f2", 40),
+    1024: ("#e2ba13", "#f9f6f2", 35),
+    2048: ("#ecc400", "#f9f6f2", 35),
+    4096: ("#3d3a33", "#f9f6f2", 35),
 }
 
 # Матрица игрового поля
@@ -34,7 +35,7 @@ game = map_2048()
 
 butt_press = False
 
-# функция, которая рисует текст
+# функция, которая печатает текст
 def drawText(text, size, surface, x, y, type, text_color=text_color):
     textobj = pygame.font.SysFont(None, size).render(text, 1, text_color)
     textrect = textobj.get_rect()
@@ -43,6 +44,7 @@ def drawText(text, size, surface, x, y, type, text_color=text_color):
     else:
         textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
+
 
 def pressent(click, command):
     global butt_press
@@ -53,6 +55,7 @@ def pressent(click, command):
         butt_press = False
         if command is not None:
             command()
+
 
 class Button:
     def __init__(self, width, height, inactive_color, active_color):
@@ -73,7 +76,7 @@ class Button:
 
             pressent(click[0], command)
             
-        drawText(message, 22, windowSurface, x + self.width/2, y + self.height/2, 'c', (251, 248, 239))
+        drawText(message, 30, windowSurface, x + self.width/2, y + self.height/2, 'c', (251, 248, 239))
 
 def terminate():
     pygame.quit()
@@ -95,9 +98,9 @@ def waitForPlayerToPressKey():
                 return
 
 def game_over_text():
-    drawText('ИГРА ОКОНЧЕНА', 30, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 - 20, 'c')
-    drawText('Нажмите клавишу любую клавишу', 21, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 10, 'c')
-    drawText('чтобы начать заново.', 21, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 30, 'c')
+    drawText('ИГРА ОКОНЧЕНА', 40, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 - 20, 'c')
+    drawText('Нажмите клавишу любую клавишу', 30, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 15, 'c')
+    drawText('чтобы начать заново.', 30, windowSurface, WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 40, 'c')
     pygame.display.update()
     waitForPlayerToPressKey()
     game.reset()
@@ -119,12 +122,12 @@ score = 0
 
 while True: # the game loop runs while the game part is playing
     windowSurface.fill(BACKGROUNDCOLOR)
-    rect_y = 100
+    rect_y = 100 + h
     score = game.score
     if score > topScore:
         topScore = score
-    drawText('Счет: %s' % (score), 30, windowSurface, 15, 10, '')
-    drawText('Рекорд: %s' % (topScore), 30, windowSurface, 15, 40, '')
+    drawText('Счет: %s' % (score), 38, windowSurface, 15, 10, '')
+    drawText('Рекорд: %s' % (topScore), 38, windowSurface, 15, 50, '')
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -148,15 +151,16 @@ while True: # the game loop runs while the game part is playing
             if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 if game.down():
                     game.fill2()
+
                     
     if game.is_gameover():
         game_over_text()
 
     pygame.draw.rect(windowSurface, (187, 173, 160), (h, rect_y - h, RECT_SIZE[0]*4 + h*5, RECT_SIZE[1]*4 + h*5))
     
-    button = Button(70, 30, (144, 122, 99), (122, 102, 79))
+    button = Button(90, 50, (144, 122, 99), (122, 102, 79))
     
-    # Цикл, рисующий клетки игрового поля
+    # Цикл, рисующий клетки игрового поля   
     for i in range(4):
         rect_x = h*2
         for j in range(4):
@@ -173,22 +177,13 @@ while True: # the game loop runs while the game part is playing
             pygame.draw.rect(windowSurface, rect_color, (rect_x, rect_y, RECT_SIZE[0], RECT_SIZE[1]))
 
             if (game.data[i][j] != 0):
-                drawText(str(number), 30, windowSurface, rect_x + RECT_SIZE[0]/2, rect_y + RECT_SIZE[1]/2, 'c', numb_color)
+                drawText(str(number), numb_size, windowSurface, rect_x + RECT_SIZE[0]/2, rect_y + RECT_SIZE[1]/2, 'c', numb_color)
 
             rect_x += RECT_SIZE[0] + h
         rect_y += RECT_SIZE[0] + h
 
-    button.draw(windowSurface, 200, 30, 'сброс', game.reset)
+    button.draw(windowSurface, 270, 30, 'сброс', game.reset)
 
     pygame.display.update()
 
     mainClock.tick(FPS)
-
-    
-'''
-drawText('ИГРА ОКОНЧЕНА', font, windowSurface, (WINDOWWIDTH / 3), (WINDOWHEIGHT / 3))
-drawText('Нажмите клавишу "a" чтобы начать заново.', font, windowSurface, (WINDOWWIDTH / 3 - 140), (WINDOWHEIGHT / 3) + 50)
-pygame.display.update()
-waitForPlayerToPressKey()
-'''
-
