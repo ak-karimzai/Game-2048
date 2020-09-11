@@ -89,9 +89,10 @@ class test_map_2048(TestCase):
 
         self.assertEqual(end, board.data)
 
-    ##Движение не происходит
+    ###Движение не происходит
+    ##Заполненная доска
     #left()
-    def test_no_move_left(self):
+    def test_no_move_left_full(self):
         start = [
             [8, 4, 2, 4],
             [6, 4, 2, 8],
@@ -105,7 +106,7 @@ class test_map_2048(TestCase):
         self.assertFalse(board.left())
 
     #right()
-    def test_no_move_right(self):
+    def test_no_move_right_full(self):
         start = [
             [8, 4, 2, 4],
             [6, 4, 2, 8],
@@ -119,7 +120,7 @@ class test_map_2048(TestCase):
         self.assertFalse(board.right())
 
     #up()
-    def test_no_move_up(self):
+    def test_no_move_up_full(self):
         start = [
             [2, 4, 6, 8],
             [4, 2, 8, 6],
@@ -132,7 +133,7 @@ class test_map_2048(TestCase):
 
         self.assertFalse(board.up())
 
-    def test_no_move_down(self):
+    def test_no_move_down_full(self):
         start = [
             [8, 4, 2, 4],
             [6, 256, 32, 2],
@@ -144,6 +145,63 @@ class test_map_2048(TestCase):
         board.data = start
 
         self.assertFalse(board.down())
+
+    ##Незаполненная доска
+    #left()
+    def test_no_move_left(self):
+        start = [
+            [2, 4, 0, 0],
+            [0, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.left())
+
+    #right()
+    def test_no_move_right(self):
+        start = [
+            [0, 4, 2, 4],
+            [0, 0, 0, 0],
+            [2, 8, 16, 8],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.right())
+
+    #up()
+    def test_no_move_up(self):
+        start = [
+            [2, 4, 0, 8],
+            [4, 2, 0, 0],
+            [0, 8, 0, 0],
+            [0, 4, 0, 0]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.up())
+
+    def test_no_move_down(self):
+        start = [
+            [0, 0, 0, 0],
+            [0, 0, 2, 0],
+            [4, 2, 4, 0],
+            [2, 4, 8, 2]
+        ]
+
+        board = map_2048()
+        board.data = start
+
+        self.assertFalse(board.down())
+
 
 
     ###board utilities
