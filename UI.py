@@ -36,6 +36,16 @@ def terminate():
     pygame.quit()
     sys.exit()
 
+def read_from_file():
+    try:
+        file = open("2048.txt", "r")
+        topScore = int(file.read())
+        file.close()
+    except IOError:
+        print("File 2048.txt not finded for reading the last record")
+        topScore = 0
+    return topScore
+
 def add_to_file(x):
     file = open("2048.txt", "w")
     file.write(str(x))
@@ -78,9 +88,7 @@ font = pygame.font.SysFont(None, 30)
 font2 = pygame.font.SysFont(None, 21)
 
 # Переменные, в которых хранятся счет и рекорд
-file = open("2048.txt", "r")
-topScore = int(file.read())
-file.close()
+topScore = read_from_file()
 score = 0
 
 while True: # the game loop runs while the game part is playing
