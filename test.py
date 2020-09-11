@@ -162,7 +162,7 @@ class test_map_2048(TestCase):
 
         #после вызова reset() на доске находятся
         #два квадрата с 2, поэтому счёт должен быть 0
-        self.assertEqual(board.get_score(), 0)
+        self.assertEqual(board.score, 0)
 
     ##get_space_count()
     #полностью заполнено
