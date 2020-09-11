@@ -11,13 +11,16 @@ class map_2048():
         # Сбросить данные игры
         self.row = 4
         self.col = 4
+
         self.data = [
                     [0 for i in range(self.col)]
                          for j in range(self.row)
                     ]
         self.score = 0
-        # self.data = [[x + 4 * y for x in range(self.__col)]
-        #              for y in range(self.__row)]
+        '''
+        self.data = [[x + 4 * y for x in range(self.col)]
+                      for y in range(self._row)]
+        '''
         # self.data = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
 
@@ -46,7 +49,7 @@ class map_2048():
         return s
         '''
 
-    # Заполнит 2 до пустой позиции, если заполнение прошло успешно, 
+    # Заполнит 2 и 4 до пустой позиции, если заполнение прошло успешно, 
     # верните True, если оно заполнено, верните False,
     def fill2(self):
         blank_count = self.get_space_count()
@@ -99,7 +102,7 @@ class map_2048():
             for r in self.data:
                 for c in range(self.col - 1):
                     if r[c] == 0:
-                        moveflag = True
+                        #moveflag = True
                         r[c] = r[c + 1]
                         r[c + 1] = 0
         
@@ -107,7 +110,7 @@ class map_2048():
         # объединения находится слева, а справа - заполнить пространство
         for r in self.data:
             for c in range(self.col - 1):
-                if r[c] == r[c + 1]:
+                if r[c] == r[c + 1] and r[c] != 0:
                     moveflag = True
                     r[c] *= 2
                     r[c + 1] = 0
@@ -119,7 +122,7 @@ class map_2048():
             for r in self.data:
                 for c in range(self.col - 1):
                     if r[c] == 0:
-                        moveflag = True
+                        #moveflag = True
                         r[c] = r[c + 1]
                         r[c + 1] = 0
         return moveflag
@@ -149,7 +152,7 @@ class map_2048():
             for c in range(self.col):
                 for r in range(self.row - 1):
                     if self.data[r][c] == 0:
-                        moveflag = True
+                        #moveflag = True
                         self.data[r][c] = self.data[r + 1][c]
                         self.data[r + 1][c] = 0
         
@@ -157,7 +160,7 @@ class map_2048():
         #  результат объединения выше, и пространство ниже заполнено
         for c in range(self.col):
             for r in range(self.row - 1):
-                if self.data[r][c] == self.data[r + 1][c]:
+                if self.data[r][c] == self.data[r + 1][c] and self.data[r][c] != 0:
                     moveflag = True
                     self.data[r][c] *= 2
                     self.data[r + 1][c] = 0
@@ -169,7 +172,7 @@ class map_2048():
             for c in range(self.col):
                 for r in range(self.row - 1):
                     if self.data[r][c] == 0:
-                        moveflag = True
+                        #moveflag = True
                         self.data[r][c] = self.data[r + 1][c]
                         self.data[r + 1][c] = 0
         return moveflag
