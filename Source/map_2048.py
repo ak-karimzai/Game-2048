@@ -153,11 +153,12 @@ class map_2048():
         for times in range(self.row - 1):
             for c in range(self.col):
                 for r in range(self.row - 1):
-                    if self.data[r][c] == 0 and self.data[r + 1][c] != 0:
-                        moveflag = True
                     if self.data[r][c] == 0:
+                        if self.data[r + 1][c] != 0:
+                            moveflag = True
                         self.data[r][c] = self.data[r + 1][c]
                         self.data[r + 1][c] = 0
+                        
         
         # Определить, есть ли столкновение, если есть столкновение, объединить,
         #  результат объединения выше, и пространство ниже заполнено
