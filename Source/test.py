@@ -265,49 +265,7 @@ class test_map_2048(TestCase):
 
         self.assertEqual(board.get_space_count(), 16)
 
-    '''##get_score()
-    #только малозначные (т.е. return = 0)
-    def test_get_score_small(self):
-        start = [
-            [0, 2, 2, 2],
-            [2, 1, 1, 1],
-            [0, 2, 2, 2],
-            [1, 1, 2, 2]
-        ]
-
-        board = map_2048()
-        board.data = start
-
-        self.assertEqual(board.get_score(), 0)
-
-    #квадраты с >=4
-    def test_get_score_middle(self):
-        start = [
-            [2, 0, 2, 4],
-            [2, 4, 4, 2],
-            [1, 2, 4, 2],
-            [2, 0, 8, 4]
-        ]
-
-        board = map_2048()
-        board.data = start
-
-        self.assertEqual(board.get_score(), 36)
-
-    #один квадрат с 1024
-    def test_get_score_1024(self):
-        start = [
-            [0, 2, 1, 1],
-            [0, 1, 1, 0],
-            [0, 0, 1024, 1],
-            [2, 1, 2, 2]
-        ]
-
-        board = map_2048()
-        board.data = start
-
-        self.assertEqual(board.get_score(), 9216) #1024*(10-1)
-    '''
+    
     ##fill2()
     #заполненная доска
     def test_fill2_filled(self):
