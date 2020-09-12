@@ -83,7 +83,7 @@ class map_2048():
             for i in range(self.col - 1):
                 if r[i] == r[i + 1]:
                     return False
-        for c in range(self.col - 1):
+        for c in range(self.col):
             # Если два смежных элемента одинаковы 
             # в вертикальном направлении, игра не закончена
             for r in range(self.row - 1):
@@ -101,9 +101,9 @@ class map_2048():
         for times in range(self.col - 1):
             for r in self.data:
                 for c in range(self.col - 1):
-                    if r[c] == 0 and r[c + 1] != 0:
-                        moveflag = True
                     if r[c] == 0:
+                        if r[c + 1] != 0:
+                            moveflag = True
                         #moveflag = True
                         r[c] = r[c + 1]
                         r[c + 1] = 0
