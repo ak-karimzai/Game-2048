@@ -1,1 +1,1 @@
-# Game-2048-team-spirit
+# Game-2048
